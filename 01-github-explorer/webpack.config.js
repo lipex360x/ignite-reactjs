@@ -1,9 +1,10 @@
 /* eslint-disable */
 const path = require('path')
 const HtmlPlugin = require('html-webpack-plugin')
+const isDevelopment = process.env.NODE_ENV !== 'production'
 
 module.exports = {
-  mode: 'development',
+  mode: isDevelopment ? 'development' : 'production',
   
   devtool: 'source-map',
 
