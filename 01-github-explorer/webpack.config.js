@@ -15,6 +15,11 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
 
+  devServer: {
+    static: path.resolve(__dirname, 'public'),
+    port: 8008
+  },
+
   plugins: [
     new HtmlPlugin({
       template: path.resolve(__dirname, 'public', 'index.html')
