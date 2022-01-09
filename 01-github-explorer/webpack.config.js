@@ -1,5 +1,6 @@
 /* eslint-disable */
 const path = require('path')
+const HtmlPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -13,6 +14,12 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
+
+  plugins: [
+    new HtmlPlugin({
+      template: path.resolve(__dirname, 'public', 'index.html')
+    })
+  ],
 
   module: {
     rules: [
