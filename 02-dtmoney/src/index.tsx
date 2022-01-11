@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { createServer } from 'miragejs'
-import { App } from './App';
+import { App } from './App'
 
 createServer({
-  routes() {
+  routes () {
     this.namespace = 'api'
 
     this.get('/transactions', () => {
@@ -27,4 +27,4 @@ ReactDOM.render(
     <App />
   </React.StrictMode>,
   document.getElementById('root')
-);
+)
