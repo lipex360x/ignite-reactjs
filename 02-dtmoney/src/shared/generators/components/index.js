@@ -1,13 +1,13 @@
 /* eslint-disable */
-const { camelCase } = require('../_utils/textTransform')
+const { pascalCase } = require('../_utils/textTransform')
 
 module.exports = {
-  description: 'Generate a {{pascalCase name }}',
+  description: 'Generate a new Component',
   prompts: [
     {
       type: 'input',
-      name: 'fileName',
-      message: 'File Name',
+      name: 'componentName',
+      message: 'Component Name',
       // default: 'test',
       validate: (value) => {
         if (!value) return 'Value is required'
@@ -20,22 +20,27 @@ module.exports = {
   ],
 
   actions: (data) => {
-    const pathTemplate = './{{ name }}/templates'
-    const generatePath = `../../modules/${camelCase(data.moduleName)}`
-
+    const pathTemplate = './components/templates'
+    const generatePath = `../../components/${pascalCase(data.componentName)}`
 
     const files = () => {
       const arrayFiles = []
 
       arrayFiles.push({
         data: {},
-        path: `${generatePath}/xxxx`,
-        name: 'fileName.ts',
-        template: '{{ name }}.hbs',
+        path: `${generatePath}`,
+        name: 'index.tsx',
+        template: 'components.hbs',
         force: false
       })
       
-      // snippet: plopFilesTemplate
+      arrayFiles.push({
+        data: {},
+        path: `${generatePath}`,
+        name: 'styles.ts',
+        template: 'styles.hbs',
+        force: false
+      })
       
       return arrayFiles      
     }
@@ -57,7 +62,7 @@ module.exports = {
     })
 
     // Message
-    const message = () => (`Module ${data.moduleName} created`)
+    const message = () => (`Component ${data.componentName} added`)
     action.push(message)
 
     return action

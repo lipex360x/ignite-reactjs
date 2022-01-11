@@ -1,0 +1,45 @@
+{
+	"Template Snippets": {
+    "prefix": "snippetTemplate",
+    "body": [
+      "\"${1:SNIPPET_TITLE}\": {",
+      "  \"prefix\": \"${2:PREFIX}\",",
+      "  \"body\": [",
+      "    \"${3:BODY}\"",
+      "  ]",
+      "},",
+      "",
+    ]
+  },
+	
+  "Plop Files Template": {
+    "prefix": "plopFilesTemplate",
+    "body": [
+      "arrayFiles.push({",
+      "  data: {},",
+      "  path: `\\${generatePath}/xxxx`,",
+      "  name: '${1:fileName}.ts',",
+      "  template: '${2:templateName}.hbs',",
+      "  force: false",
+      "})",
+    ]
+  },
+
+  "Plop Prompt Template": {
+    "prefix": "plopPromptTemplate",
+    "body": [
+      "{",
+      "  type: 'input',",
+      "  name: '${1:NAME}',",
+      "  message: '${2:Text}',",
+      "  default: 'Default_Value',",
+      "  validate: (value) => {",
+      "    if (!value) {",
+      "      return 'Value is required'",
+      "    }",
+      "    return true",
+      "  }",
+      "}"
+    ]
+  },
+}
