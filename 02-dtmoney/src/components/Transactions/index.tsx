@@ -1,6 +1,14 @@
+import { useEffect } from 'react'
+import { api } from '../../services/api'
 import * as S from './styles'
 
 export function Transactions () {
+
+  useEffect(() => {
+    api.get('http://localhost:3000/api/transactions')
+      .then(response => console.log(response.data))
+  },[])
+
   return (
     <S.Container>
       <table>
