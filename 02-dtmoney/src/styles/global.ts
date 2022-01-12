@@ -49,6 +49,7 @@ export const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
     border: 0;
+    background: transparent;
   }
 
   [disabled] {
@@ -71,12 +72,27 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   .react-modal-content {
+    position: relative;
+    
     width: 100%;
     max-width: 36rem;
-    background: var(--background);
     padding: 3rem;
-    position: relative;
+
+    background: var(--background);
+    
     border-radius: 0.25rem;
+  }
+
+  .react-modal-close {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.8);
+    }
   }
 
 `
