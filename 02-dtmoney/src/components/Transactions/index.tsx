@@ -1,11 +1,10 @@
-import { useContext } from 'react'
 import { dateFormat } from '../../shared/utils/dateTransform'
 import { numberToReal } from '../../shared/utils/numberTransform'
-import { TransactionsContext } from '../../TransactionsContext'
+import { useTransactions } from '../../hooks/useTransactions'
 import * as S from './styles'
 
 export function Transactions () {
-  const { transactions } = useContext(TransactionsContext)
+  const { transactions } = useTransactions()
   return (
     <S.Container>
       <table>
