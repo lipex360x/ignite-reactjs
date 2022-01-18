@@ -2,13 +2,34 @@ import { useContext } from 'react'
 import incomeImg from '../../assets/income.svg'
 import outcomeImg from '../../assets/outcome.svg'
 import totalImg from '../../assets/total.svg'
+import { numberToReal } from '../../shared/utils/numberTransform'
 import { TransactionsContext } from '../../TransactionsContext'
 
 import * as S from './styles'
 
 export function Summary () {
-  const transactions = useContext(TransactionsContext)
-  console.log(transactions)
+  const { transactions } = useContext(TransactionsContext)
+
+  // const totalDeposits = transactions.reduce((acc, transaction) => {
+  //   if (transaction.type === 'deposit') return acc + transaction.amount
+  //   return acc
+  // }, 0)
+
+  const summary = transactions.reduce((acc, transaction) => {
+    if (transaction.type === 'deposit') {
+      acc.deposits += transaction.amount
+      acc.total += transaction.amount
+    } else {
+      acc.withdraw += transaction.amount
+      acc.total -= transaction.amount
+    }
+
+    return acc
+  }, {
+    deposits: 0,
+    withdraw: 0,
+    total: 0
+  })
 
   return (
     <S.Container>
@@ -17,7 +38,7 @@ export function Summary () {
           <p>Income</p>
           <img src={incomeImg} alt="income icon" />
         </header>
-        <strong>R$1.000,00</strong>
+        <strong>{numberToReal(summary.deposits)}</strong>
       </div>
 
       <div>
@@ -25,7 +46,7 @@ export function Summary () {
           <p>Outcome</p>
           <img src={outcomeImg} alt="income icon" />
         </header>
-        <strong>-R$500,00</strong>
+        <strong>-{numberToReal(summary.withdraw)}</strong>
       </div>
 
       <div className='total'>
@@ -33,7 +54,7 @@ export function Summary () {
           <p>Total</p>
           <img src={totalImg} alt="income icon" />
         </header>
-        <strong>R$500,00</strong>
+        <strong>{numberToReal(summary.total)}</strong>
       </div>
     </S.Container>
   )
