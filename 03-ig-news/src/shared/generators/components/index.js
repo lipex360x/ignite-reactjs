@@ -20,7 +20,7 @@ module.exports = {
 
   actions: (data) => {
     const pathTemplate = './components/templates'
-    const generatePath = `../../components/${capitalize(data.componentName)}`
+    const generatePath = '../../components/{{pascalCase componentName}}'
 
     const files = () => {
       const arrayFiles = []
