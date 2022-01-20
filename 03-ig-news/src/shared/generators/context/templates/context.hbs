@@ -1,0 +1,54 @@
+import { createContext, ReactNode, useContext, useState } from 'react'
+import { api } from '../services/api'
+
+interface ProviderProps {
+  id: string
+  data: string // provider properties
+  createdAt: Date
+  updatedAt: Date
+}
+
+interface ProviderChildrens {
+  children: ReactNode
+}
+
+type Request = Omit<ProviderProps, 'id' | 'createdAt' | 'updatedAt'>
+
+interface UseContextProps {
+  providerData: ProviderProps[]
+  createData: (data: Request) => Promise<void>
+}
+
+const {{pascalCase contextName}}Context = createContext<UseContextProps>(
+  {} as UseContextProps
+)
+
+export function {{pascalCase contextName}}Provider ({ children }: ProviderChildrens) {
+  const [providerData, setProviderData] = useState<ProviderProps[]>([])
+
+  useEffect(() => {
+    async function getData () {
+      const { data } = await api.get('xxxxx') // api get route
+      setProviderData(data.XXXXXXXX) // data property
+    }
+
+    getData()
+  }, [])
+
+  async function createData (data: Request) {
+    const response = await api.post('xxxxx', data) // api post route
+    const { {{camelCase contextName}} } = response.data
+
+    setProviderData([...providerData, {{camelCase contextName}}])
+  }
+
+  return (
+    <{{pascalCase contextName}}Context.Provider value=\{{ providerData, createData }}>
+      {children}
+    </{{pascalCase contextName}}Context.Provider>
+  )
+}
+
+export function use{{pascalCase contextName}} () {
+  return useContext({{pascalCase contextName}}Context)
+}
